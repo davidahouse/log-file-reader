@@ -1,0 +1,24 @@
+{
+  "name": "log-file-reader",
+  "main": "index.js",
+  "version": "0.1.0",
+  "description": "A command line app for turning swiftlint output to markdown",
+  "license": "MIT",
+  "repository": "davidahouse/log-file-reader",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint $(find . -name \"*.js\" -not -path \"./node_modules/*\" -not -path \"./public/*\")",
+    "lint-fix": "eslint --fix $(find . -name \"*.js\" -not -path \"./node_modules/*\" -not -path \"./public/*\")"
+  },
+  "dependencies": {
+    "line-reader": "^0.4.0",
+    "pkginfo": "^0.4.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.5.0",
+    "mocha": "^6.2.2"
+  }
+}
