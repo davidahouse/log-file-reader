@@ -8,33 +8,36 @@ async function parseLog(fileName, options) {
     let state = { totalKB: 0 };
     let lineNumber = 1;
     const readStream = openStream(fileName, options);
-    lineReader.eachLine(readStream, function(line, last) {
-      const capturedLine = captureLine(line, previousLine, options, state);
-      if (capturedLine != null) {
-        state = capturedLine.state;
-        results.push({
-          line: capturedLine.line,
-          lineNumber: lineNumber
-        });
+    lineReader.eachLine(
+      readStream,
+      function(line) {
+        const capturedLine = captureLine(line, previousLine, options, state);
+        if (capturedLine != null) {
+          state = capturedLine.state;
+          results.push({
+            line: capturedLine.line,
+            lineNumber: lineNumber
+          });
 
-        if (options.last != null) {
-          if (results.length > options.last) {
-            results.shift();
-          }
-        } else if (options.lastKB != null) {
-          if (state.totalKB > options.lastKB) {
-            const first = results.shift();
-            state.totalKB = state.totalKB - first.line.length;
+          if (options.last != null) {
+            if (results.length > options.last) {
+              results.shift();
+            }
+          } else if (options.lastKB != null) {
+            if (state.totalKB > options.lastKB) {
+              const first = results.shift();
+              state.totalKB = state.totalKB - first.line.length;
+            }
           }
         }
-      }
 
-      lineNumber += 1;
-      previousLine = line;
-      if (last) {
+        lineNumber += 1;
+        previousLine = line;
+      },
+      function(err) {
         resolve(results);
       }
-    });
+    );
   });
 }
 

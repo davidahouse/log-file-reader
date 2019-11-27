@@ -6,10 +6,26 @@ const reader = require("../index.js");
 describe("Log File Reader", function() {
   beforeEach(() => {});
 
+  it("should return empty if file itself is empty", function() {
+    return reader
+      .parseLog("./test/emptyfile", { first: 10 })
+      .then(function(result) {
+        expect(result.length).to.equal(0);
+      });
+  });
+
   it("should return empty if no options", function() {
     return reader.parseLog("./test/apache_logs", {}).then(function(result) {
       expect(result.length).to.equal(0);
     });
+  });
+
+  it("should return empty if file doesn't exist", function() {
+    return reader
+      .parseLog("./test/fileDoesNotExist", { first: 10 })
+      .then(function(result) {
+        expect(result.length).to.equal(0);
+      });
   });
 
   it("should return first number of lines if first set in options", function() {
