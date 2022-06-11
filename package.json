@@ -15,10 +15,10 @@
     "pkginfo": "^0.4.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^6.5.1",
+    "eslint": "^8.12.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^6.5.0",
-    "mocha": "^6.2.2"
+    "chai": "^4.3.6",
+    "eslint-config-prettier": "^8.5.0",
+    "mocha": "^9.2.0"
   }
 }
